@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { logWeight, updateEntry } from "@/services/weightServices";
+import { deleteEntry, logWeight, updateEntry } from "@/services/weightServices";
 import { Check, Trash } from "lucide-react";
 import { useState } from "react";
 

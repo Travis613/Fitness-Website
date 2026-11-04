@@ -52,3 +52,12 @@ export async function updateEntry(
     console.error(`Problem updating a weight: ${error}`);
   }
 }
+
+export async function deleteEntry(id: number) {
+  try {
+    const response = await axios.delete(`${BASEURL}deleteWeight/${id}`);
+    console.log(response.data);
+  } catch (error) {
+    console.error(`Error deleting data: ${error}`);
+  }
+}
