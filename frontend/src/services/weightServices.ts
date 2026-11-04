@@ -30,3 +30,25 @@ export async function fetchWeights() {
     console.error(`Error fetching data: ${error}`);
   }
 }
+
+export async function updateEntry(
+  id: number,
+  weight: number,
+  note: String,
+  time: String,
+  date: String,
+) {
+  const data = {
+    weight,
+    note,
+    date,
+    time,
+  };
+
+  try {
+    const response = await axios.put(`${BASEURL}updateWeight/${id}`, data);
+    console.log(response.data);
+  } catch (error) {
+    console.error(`Problem updating a weight: ${error}`);
+  }
+}

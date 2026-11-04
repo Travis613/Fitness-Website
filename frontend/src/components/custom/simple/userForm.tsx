@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { logWeight } from "@/services/weightServices";
+import { logWeight, updateEntry } from "@/services/weightServices";
 import { Check, Trash } from "lucide-react";
 import { useState } from "react";
 
@@ -65,11 +65,7 @@ export function UserForm({ page }: Props) {
               </Button>
               <Button // <-- cause im used twice
                 className="bg-blue-500 hover:bg-blue-400 min-w-1/2"
-                onClick={() => {
-                  logWeight(weight, note);
-                  setWeight(0);
-                  setNote("");
-                }}
+                onClick={() => {}}
               >
                 Save Entry
               </Button>
