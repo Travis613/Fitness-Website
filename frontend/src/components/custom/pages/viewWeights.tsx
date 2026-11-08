@@ -56,7 +56,9 @@ export function ViewWeights() {
                       </div>
                       <Pencil
                         size={17}
-                        onClick={() => navigate("/updateWeight")}
+                        onClick={() =>
+                          navigate("/updateWeight", { state: { id: value.id } })
+                        }
                       />
                     </div>
                   </div>

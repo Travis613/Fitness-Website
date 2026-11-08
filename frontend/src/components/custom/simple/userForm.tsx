@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { deleteEntry, logWeight, updateEntry } from "@/services/weightServices";
 import { Check, Trash } from "lucide-react";
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 interface Props {
   page: "Update" | "Log";
@@ -13,8 +14,41 @@ interface Props {
 export function UserForm({ page }: Props) {
   const [weight, setWeight] = useState(0);
   const [note, setNote] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const location = useLocation();
+  const navigator = useNavigate();
+
+  const userId = location.state?.id;
+
   return (
     <>
+      {page === "Update" ? (
+        <div className="flex gap-1">
+          <div className="w-1/2">
+            <Label>Time</Label>
+            <Input
+              type="time"
+              value={time}
+              onChange={(e) => {
+                setTime(e.target.value);
+              }}
+            />
+          </div>
+          <div className="w-1/2">
+            <Label>Date</Label>
+            <Input
+              type="date"
+              value={date}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+            />
+          </div>
+        </div>
+      ) : (
+        <></>
+      )}
       <div className="flex items-center justify-start w-full my-15">
         <div>
           <Label>Weight</Label>
@@ -56,16 +90,30 @@ export function UserForm({ page }: Props) {
           </Button>
         ) : (
           <div className="flex justify-between mx-2">
-            <Button variant={"destructive"} className={"min-w-1/5"}>
+            <Button
+              variant={"destructive"}
+              className={"min-w-1/5"}
+              onClick={() => {
+                deleteEntry(userId);
+                navigator("/viewWeights");
+              }}
+            >
               <Trash /> Delete
             </Button>
             <div className="flex gap-4">
-              <Button variant={"outline"} className="min-w-1/4">
+              <Button
+                variant={"outline"}
+                className="min-w-1/4"
+                onClick={() => navigator("/viewWeights")}
+              >
                 Cancel
               </Button>
               <Button // <-- cause im used twice
                 className="bg-blue-500 hover:bg-blue-400 min-w-1/2"
-                onClick={() => {}}
+                onClick={() => {
+                  updateEntry(userId, weight, note, time, date);
+                  navigator("/viewWeights");
+                }}
               >
                 Save Entry
               </Button>
