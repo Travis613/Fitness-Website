@@ -16,7 +16,9 @@ export function UserForm({ page }: Props) {
   const [note, setNote] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
   const location = useLocation();
+
   const navigator = useNavigate();
 
   const userId = location.state?.id;
@@ -80,6 +82,7 @@ export function UserForm({ page }: Props) {
           <Button //maybe make me a component
             className="bg-blue-500 hover:bg-blue-400 w-full py-7"
             onClick={() => {
+              navigator("/viewWeights");
               logWeight(weight, note);
               setWeight(0);
               setNote("");
